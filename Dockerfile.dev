@@ -1,0 +1,9 @@
+FROM quay.io/devfile/universal-developer-image:ubi8-9436df2
+
+ENV NODEJS_10_VERSION=10.24.1
+RUN source ~/.bashrc && nvm install v${NODEJS_10_VERSION} && nvm alias default v$NODEJS_10_VERSION && nvm use v$NODEJS_10_VERSION
+ENV PATH=$NVM_DIR/versions/node/v$NODEJS_10_VERSION/bin:$PATH
+ENV NODEJS_HOME_10=$NVM_DIR/versions/node/v$NODEJS_10_VERSION
+
+ENV PORT 8079
+EXPOSE 8079
