@@ -90,12 +90,12 @@ components:
   - name: carts-volume
     volume:
       ephemeral: true
-# commands:
-#   - id: init-project
-#     exec:
-#       component: frontend
-#       commandLine: yarn install
-#       workingDir: $PROJECT_SOURCE
+commands:
+  - id: init-project
+    exec:
+      component: frontend
+      commandLine: echo $PROJECT_SOURCE
+      workingDir: $PROJECT_SOURCE
 events:
   postStart:
     - init-project

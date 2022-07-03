@@ -4,6 +4,8 @@
 [![Contribute](https://img.shields.io/static/v1?label=code%20with&message=che-code&logo=eclipseche&color=FDB940&labelColor=525C86)](https://che-dogfooding.apps.che-dev.x6e0.p1.openshiftapps.com#https://github.com/l0rd/microservices-demo-frontend)
 
 
+https://devspaces-openshift-operators.apps.sb105.caas.gcp.ford.com/#https://github.com/abaker-9/dev-pwsh
+
 Front-end app
 ---
 Front-end application written in [Node.js](https://nodejs.org/en/) that puts together all of the microservices under [microservices-demo](https://github.com/microservices-demo/microservices-demo).
@@ -58,7 +60,7 @@ make test
 ```
 
 ## End-to-End tests:
-  
+
 To make sure that the test suite is running against the latest (local) version with your changes, you need to manually build
 the image, run the container and attach it to the proper Docker networks.
 There is a make task that will do all this for you:
