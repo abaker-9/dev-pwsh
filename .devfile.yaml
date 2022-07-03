@@ -9,7 +9,7 @@ components:
     container:
       image: registry.ford.com/abaker9/universal-developer-image:ubi9-latest #quay.io/mloriedo/universal-developer-image:buildah
       memoryLimit: 2G
-      memoryRequest: 256Mi
+      memoryRequest: 1Gi
       cpuLimit: 500m
       cpuRequest: 30m
       endpoints:
