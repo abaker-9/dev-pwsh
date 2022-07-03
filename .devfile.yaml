@@ -1,13 +1,13 @@
 schemaVersion: 2.1.0
 metadata:
-  name: microservices-demo
+  name: dev-pwsh
 attributes:
   controller.devfile.io/storage-type: ephemeral
   controller.devfile.io/scc: container-build
 components:
   - name: frontend
     container:
-      image: quay.io/mloriedo/universal-developer-image:buildah
+      image: registry.ford.com/abaker9/universal-developer-image:ubi9-latest #quay.io/mloriedo/universal-developer-image:buildah
       memoryLimit: 2G
       memoryRequest: 256Mi
       cpuLimit: 500m
