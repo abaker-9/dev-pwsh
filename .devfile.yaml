@@ -12,9 +12,9 @@ components:
       memoryRequest: 1Gi
       cpuLimit: 500m
       cpuRequest: 30m
-      # endpoints:
-      #   - name: frontend
-      #     targetPort: 8079
+      endpoints:
+        - name: frontend
+          targetPort: 8079
   # - name: catalogue
   #   container:
   #     image: registry.ford.com/abaker9/weaveworksdemos/catalogue:0.3.5
