@@ -12,84 +12,84 @@ components:
       memoryRequest: 1Gi
       cpuLimit: 500m
       cpuRequest: 30m
-      endpoints:
-        - name: frontend
-          targetPort: 8079
-  - name: catalogue
-    container:
-      image: registry.ford.com/abaker9/weaveworksdemos/catalogue:0.3.5
-      cpuLimit: 200m
-      memoryLimit: 200Mi
-      cpuRequest: 100m
-      memoryRequest: 100Mi
-      command:
-        - sh
-      args:
-        - "-c"
-        - 'sleep 30 && /app -port 8080 -DSN "catalogue_user:default_password@tcp(localhost:3306)/socksdb"'
-      endpoints:
-        - name: catalogue
-          targetPort: 8080
-          exposure: internal
-  - name: catalogue-db
-    container:
-      image: registry.ford.com/abaker9/weaveworksdemos/catalogue-db:0.3.0
-      cpuLimit: 200m
-      memoryLimit: 300Mi
-      cpuRequest: 100m
-      memoryRequest: 100Mi
-      env:
-        - name: MYSQL_ROOT_PASSWORD
-          value: fake_password
-        - name: MYSQL_DATABASE
-          value: socksdb
-      volumeMounts:
-        - name: catalogue-volume
-          path: /var/lib/mysql
-      endpoints:
-        - name: catalogue-db
-          targetPort: 3360
-          exposure: internal
-  - name: catalogue-volume
-    volume:
-      ephemeral: true
-  - name: carts
-    container:
-      image: registry.ford.com/abaker9/weaveworksdemos/carts:0.4.8
-      cpuLimit: 200m
-      memoryLimit: 500Mi
-      cpuRequest: 100m
-      memoryRequest: 100Mi
-      env:
-        - name: JAVA_OPTS
-          value: -Xms64m -Xmx128m -XX:+UseG1GC -Djava.security.egd=file:/dev/urandom -Dspring.zipkin.enabled=false
-      command:
-        - sh
-      args:
-        - "-c"
-        - "sleep 30 && /usr/local/bin/java.sh -jar ./app.jar --port=80"
-  - name: carts-db
-    container:
-      image: registry.ford.com/abaker9/mongo:3.4
-      cpuLimit: 200m
-      memoryLimit: 300Mi
-      cpuRequest: 100m
-      memoryRequest: 100Mi
-      env:
-        - name: MONGO_INITDB_ROOT_USERNAME
-          value: root
-        - name: MONGO_INITDB_ROOT_PASSWORD
-          value: rootpassword
-      volumeMounts:
-        - name: carts-volume
-          path: /data/db
-      endpoints:
-        - name: carts-db
-          targetPort: 27017
-          exposure: internal
-  - name: carts-volume
-    volume:
-      ephemeral: true
+      # endpoints:
+      #   - name: frontend
+      #     targetPort: 8079
+  # - name: catalogue
+  #   container:
+  #     image: registry.ford.com/abaker9/weaveworksdemos/catalogue:0.3.5
+  #     cpuLimit: 200m
+  #     memoryLimit: 200Mi
+  #     cpuRequest: 100m
+  #     memoryRequest: 100Mi
+  #     command:
+  #       - sh
+  #     args:
+  #       - "-c"
+  #       - 'sleep 30 && /app -port 8080 -DSN "catalogue_user:default_password@tcp(localhost:3306)/socksdb"'
+  #     endpoints:
+  #       - name: catalogue
+  #         targetPort: 8080
+  #         exposure: internal
+  # - name: catalogue-db
+  #   container:
+  #     image: registry.ford.com/abaker9/weaveworksdemos/catalogue-db:0.3.0
+  #     cpuLimit: 200m
+  #     memoryLimit: 300Mi
+  #     cpuRequest: 100m
+  #     memoryRequest: 100Mi
+  #     env:
+  #       - name: MYSQL_ROOT_PASSWORD
+  #         value: fake_password
+  #       - name: MYSQL_DATABASE
+  #         value: socksdb
+  #     volumeMounts:
+  #       - name: catalogue-volume
+  #         path: /var/lib/mysql
+  #     endpoints:
+  #       - name: catalogue-db
+  #         targetPort: 3360
+  #         exposure: internal
+  # - name: catalogue-volume
+  #   volume:
+  #     ephemeral: true
+  # - name: carts
+  #   container:
+  #     image: registry.ford.com/abaker9/weaveworksdemos/carts:0.4.8
+  #     cpuLimit: 200m
+  #     memoryLimit: 500Mi
+  #     cpuRequest: 100m
+  #     memoryRequest: 100Mi
+  #     env:
+  #       - name: JAVA_OPTS
+  #         value: -Xms64m -Xmx128m -XX:+UseG1GC -Djava.security.egd=file:/dev/urandom -Dspring.zipkin.enabled=false
+  #     command:
+  #       - sh
+  #     args:
+  #       - "-c"
+  #       - "sleep 30 && /usr/local/bin/java.sh -jar ./app.jar --port=80"
+  # - name: carts-db
+  #   container:
+  #     image: registry.ford.com/abaker9/mongo:3.4
+  #     cpuLimit: 200m
+  #     memoryLimit: 300Mi
+  #     cpuRequest: 100m
+  #     memoryRequest: 100Mi
+  #     env:
+  #       - name: MONGO_INITDB_ROOT_USERNAME
+  #         value: root
+  #       - name: MONGO_INITDB_ROOT_PASSWORD
+  #         value: rootpassword
+  #     volumeMounts:
+  #       - name: carts-volume
+  #         path: /data/db
+  #     endpoints:
+  #       - name: carts-db
+  #         targetPort: 27017
+  #         exposure: internal
+  # - name: carts-volume
+  #   volume:
+  #     ephemeral: true
 # commands:
 #   - id: init-project
 #     exec:
