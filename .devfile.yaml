@@ -8,12 +8,12 @@ components:
   - name: frontend
     container:
       # image: quay.io/mloriedo/universal-developer-image:buildah #registry.ford.com/abaker9/universal-developer-image:ubi9-latest
-      # image: registry.ford.com/devspaces/universal-developer-image:20220705-1224
-      image: registry.ford.com/abaker9/universal-developer-image:pwsh
-      memoryLimit: 2G
-      memoryRequest: 1Gi
-      cpuLimit: 500m
-      cpuRequest: 30m
+      image: registry.ford.com/devspaces/universal-developer-image:20220705-1224
+      # image: registry.ford.com/abaker9/universal-developer-image:pwsh
+      # memoryLimit: 2G
+      # memoryRequest: 1Gi
+      # cpuLimit: 500m
+      # cpuRequest: 30m
       endpoints:
         - name: frontend
           targetPort: 8079
