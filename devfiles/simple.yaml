@@ -1,0 +1,24 @@
+kind: DevWorkspace
+apiVersion: workspace.devfile.io/v1alpha2
+metadata:
+  name: pwsh-demo
+spec:
+  started: true
+  template:
+    projects:
+      - name: microservices-demo-frontend
+        git:
+          remotes:
+            origin: https://github.com/l0rd/microservices-demo-frontend
+    components:
+      - name: frontend
+        container:
+          image: registry.ford.com/abaker9/universal-developer-image:ubi8-latest
+          # image: quay.io/devfile/universal-developer-image@sha256:53cec58dd190dd1e06100478ae879d7c28abd8fc883d5fdf5be3eb6e943fe5e7 #registry.ford.com/abaker9/universal-developer-image:ubi9-latest
+          memoryLimit: 1024Mi
+          memoryRequest: 256Mi
+          cpuLimit: 500m
+          cpuRequest: 30m
+      # - name: vscode
+      #   plugin:
+      #     kubernetes: vs-code

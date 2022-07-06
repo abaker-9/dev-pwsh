@@ -1,0 +1,29 @@
+FROM quay.io/mloriedo/universal-developer-image:buildah
+
+ENV \
+    SUMMARY="powershell" \
+    DESCRIPTION="powershell" \
+    POWERSHELL_TELEMETRY_OPTOUT=true \
+    DOTNET_SYSTEM_GLOBALIZATION_INVARIANT=false \
+    PSModuleAnalysisCachePath=/var/cache/microsoft/powershell/PSModuleAnalysisCache/ModuleAnalysisCache
+
+USER 0
+RUN set -ex && \
+    ##################################################################
+    # Install Powershell
+    ##################################################################
+    rpm -Uvh https://github.com/PowerShell/PowerShell/releases/download/v7.3.0-preview.5/powershell-preview-7.3.0_preview.5-1.rh.x86_64.rpm && \
+    mkdir -p ${HOME}/.local/share/powershell/PSReadLine/ && \
+    touch ${HOME}/.local/share/powershell/PSReadLine/ConsoleHost_history.txt && \
+    chmod 664 ${HOME}/.local/share/powershell/PSReadLine/ConsoleHost_history.txt && \
+    pwsh-preview \
+        -NoLogo \
+        -NoProfile \
+        -Command " \
+          \$ErrorActionPreference = 'Stop' ; \
+          \$ProgressPreference = 'SilentlyContinue' ; \
+          Get-Module PSReadLine -List; \
+          while(!(Test-Path -Path \$env:PSModuleAnalysisCachePath)) {  \
+            Write-Host "'Waiting for $env:PSModuleAnalysisCachePath'" ; \
+            Start-Sleep -Seconds 6 ; \
+          }"
