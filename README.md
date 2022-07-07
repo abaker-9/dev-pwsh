@@ -18,13 +18,13 @@
 
 - Uses Devfile format
 
-## Install PowerShell
+### Install PowerShell
 
-### Add pwsh to existing image
+#### Add pwsh to existing image
 
 [Docker](docker/Dockerfile)
 
-### Install with dotnet cli
+#### Install with dotnet cli
 
 ```PowerShell
 dotnet tool install --global PowerShell --version 7.1.7
@@ -39,7 +39,7 @@ export PATH="$PATH:/home/user/.dotnet/tools"
 > If `pwsh` is not in the path, add it's location in vscode's settings.json
   ```JSON
       "powershell.powerShellAdditionalExePaths": {
-        "7.1.7": "/usr/bin/pwsh"
+        "7.1.7": "/home/user/.dotnet/tools/pwsh"
     }
   ```
 
