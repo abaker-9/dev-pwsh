@@ -1,0 +1,24 @@
+# https://access.redhat.com/documentation/en-us/red_hat_openshift_dev_spaces/3.0/html/user_guide/using-credentials-and-configurations-in-workspaces#using-a-git-credential-store
+# https://github.com/devfile/devworkspace-operator/pull/708
+# https://github.com/eclipse/che/issues/17894
+# https://github.com/devfile/devworkspace-operator/blob/main/docs/additional-configuration.adoc
+# https://github.com/Bolodya1997/devfile-test
+# https://github.com/raffaelespazzoli/backstage-demo/blob/main/namespace-configurations/workspace-namespace-config.yaml#L60
+# https://github.com/devfile/devworkspace-operator/pull/625
+# https://github.com/eclipse/che/issues/21015
+# https://github.com/eclipse/che/issues/20432
+# https://curatedgo.com/r/dev-workspace-operator-devfiledevworkspace-operator/index.html
+# https://github.com/eclipse-che/che-operator/pull/1324/files
+# https://access.redhat.com/documentation/en-us/red_hat_openshift_dev_spaces/3.0/html-single/release_notes_and_known_issues/index
+apiVersion: v1
+kind: Secret
+metadata:
+  name: git-credentials-secret
+  labels:
+    controller.devfile.io/git-credential: "true"
+    controller.devfile.io/watch-secret: "true"
+  annotations:
+    controller.devfile.io/mount-path: /etc/.git-credentials/
+type: Opaque
+data:
+  credentials: https://<gh-login>:<gh-token>@github.ford.com #<Base64_content_of_.git-credentials>
