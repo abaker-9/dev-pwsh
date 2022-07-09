@@ -1,0 +1,41 @@
+# Danger alert:Workspace mexample failed to start
+# Detected unrecoverable deployment condition: FailedCreate pods "workspace45c0e08f21fb40a9-6d89dc8ffb-r49np" is forbidden: failed quota: abaker9-devspaces-cr: must specify limits.cpu,requests.cpu
+kind: DevWorkspace
+apiVersion: workspace.devfile.io/v1alpha2
+metadata:
+  name: test1
+spec:
+  started: true
+  template:
+    projects:
+      - name: microservices-demo-frontend
+        git:
+          remotes:
+            origin: https://github.com/l0rd/microservices-demo-frontend
+    components:
+      - name: frontend
+        container:
+          image: registry.ford.com/abaker9/universal-developer-image:ubi8-latest
+          memoryLimit: 1024Mi
+          memoryRequest: 256Mi
+          cpuLimit: 500m
+          cpuRequest: 30m
+      # - name: catalogue
+      #   container:
+      #     image: registry.ford.com/abaker9/weaveworksdemos/catalogue
+      # - name: catalogue-db
+      #   container:
+      #     image: registry.ford.com/abaker9/weaveworksdemos/catalogue-db
+      - name: vscode
+        plugin:
+          kubernetes:
+            name: vs-code
+    # components:
+    #   - name: frontend
+    #     container:
+    #       image: registry.ford.com/abaker9/universal-developer-image:ubi9-latest
+    #       #  image: quay.io/devfile/universal-developer-image@sha256:53cec58dd190dd1e06100478ae879d7c28abd8fc883d5fdf5be3eb6e943fe5e7 #registry.ford.com/abaker9/universal-developer-image:ubi9-latest
+    #       memoryLimit: 1024Mi
+    #       memoryRequest: 256Mi
+    #       cpuLimit: 500m
+    #       cpuRequest: 30m

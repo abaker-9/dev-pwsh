@@ -1,0 +1,32 @@
+apiVersion: workspace.devfile.io/v1alpha2
+kind: DevWorkspaceTemplate
+metadata:
+  name: vs-code
+spec:
+  commands:
+    - id: init-container-command
+      apply:
+        component: che-code-injector
+  events:
+    preStart:
+      - init-container-command
+  components:
+    - name: checode
+      volume: {ephemeral: true}
+    - name: che-code-injector
+      container:
+        image: quay.io/che-incubator/che-code:insiders
+        # image: quay.io/che-incubator/che-code:insiders-74c6cfd
+        command:
+          - /entrypoint-init-container.sh
+        volumeMounts:
+          - name: checode
+            path: /checode
+        # memoryLimit: 128Mi
+        # memoryRequest: 32Mi
+        # cpuLimit: 500m
+        # cpuRequest: 30m
+        memoryLimit: 1Gi
+        memoryRequest: 512Mi
+        cpuLimit: 1000m
+        cpuRequest: 500m

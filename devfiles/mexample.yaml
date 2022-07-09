@@ -1,0 +1,26 @@
+kind: DevWorkspace
+apiVersion: workspace.devfile.io/v1alpha2
+metadata:
+  name: mexample
+spec:
+  started: true
+  template:
+    projects:
+      - name: microservices-demo-frontend
+        git:
+          remotes:
+            origin: https://github.com/l0rd/microservices-demo-frontend
+    components:
+      - name: frontend
+        container:
+          image: quay.io/devfile/universal-developer-image
+      - name: catalogue
+        container:
+          image: weaveworksdemos/catalogue
+      - name: catalogue-db
+        container:
+          image: weaveworksdemos/catalogue-db
+      - name: vscode
+        plugin:
+          kubernetes:
+            name: vs-code

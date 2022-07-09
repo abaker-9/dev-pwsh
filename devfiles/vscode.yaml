@@ -1,0 +1,70 @@
+kind: DevWorkspace
+apiVersion: workspace.devfile.io/v1alpha2
+metadata:
+  name: vscode
+spec:
+  started: true
+  routingClass: che
+  template:
+    attributes:
+      controller.devfile.io/storage-type: ephemeral
+    projects:
+      - name: dev-pwsh
+        git:
+          remotes:
+            origin: "https://github.ford.com/ABAKER9/dev-pwsh"
+    components:
+      - name: editor
+        plugin:
+          kubernetes:
+            name: vs-code
+      - name: frontend
+        container:
+          # image: quay.io/mloriedo/universal-developer-image:ubi8-dw-demo
+          image: registry.ford.com/abaker9/universal-developer-image:pwsh
+          memoryLimit: 2G
+          memoryRequest: 512Mi
+          cpuLimit: 2000m
+          cpuRequest: 1000m
+          args: ["/checode/entrypoint-volume.sh"]
+          env: [{name: CODE_HOST, value: "0.0.0.0"}]
+          volumeMounts:
+            - name: checode
+              path: /checode
+          endpoints:
+            - name: frontend
+              targetPort: 8079
+            - name: nodejs
+              targetPort: 3000
+            - name: che-code
+              attributes:
+                type: main
+                discoverable: false
+                urlRewriteSupported: true
+                contributed-by: che-code.eclipse.org
+              targetPort: 3100
+              exposure: public
+              path: '?tkn=eclipse-che'
+              secure: false
+              protocol: https
+            - name: code-redirect-1
+              attributes:
+                discoverable: false
+                urlRewriteSupported: false
+                contributed-by: che-code.eclipse.org
+              targetPort: 13131
+              exposure: public
+              protocol: http
+        attributes:
+          che-code.eclipse.org/contribute-entry-point: true
+          che-code.eclipse.org/contribute-volume-mount/checode: /checode
+          che-code.eclipse.org/contribute-endpoint/che-code: 3100
+          che-code.eclipse.org/contribute-endpoint/code-redirect-1: 13131
+          che-code.eclipse.org/contribute-endpoint/code-redirect-2: 13132
+          che-code.eclipse.org/contribute-endpoint/code-redirect-3: 13133
+          che-code.eclipse.org/contribute-memoryLimit: true
+          che-code.eclipse.org/original-memoryLimit: 1G
+          che-code.eclipse.org/contribute-memoryRequest: true
+          che-code.eclipse.org/contribute-cpuLimit: true
+          che-code.eclipse.org/contribute-cpuRequest: true
+          che-code.eclipse.org/contributed-container: frontend
