@@ -15,8 +15,8 @@ spec:
       volume: {ephemeral: true}
     - name: che-code-injector
       container:
-        image: quay.io/che-incubator/che-code:insiders
-        # image: quay.io/che-incubator/che-code:insiders-74c6cfd
+        # image: quay.io/che-incubator/che-code:insiders
+        image: quay.io/che-incubator/che-code:insiders-74c6cfd
         command:
           - /entrypoint-init-container.sh
         volumeMounts:

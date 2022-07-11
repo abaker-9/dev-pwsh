@@ -29,6 +29,8 @@ RUN set -ex && \
     ##################################################################
     rpm -Uvh https://github.com/PowerShell/PowerShell/releases/download/v${PS_VERSION}/${PS_PACKAGE} && \
     mkdir -p ${HOME}/.local/share/powershell/PSReadLine/ && \
+    touch "${HOME}/.local/share/powershell/PSReadLine/Visual Studio Code Host_history.txt" && \
+    chmod 664 "${HOME}/.local/share/powershell/PSReadLine/Visual Studio Code Host_history.txt" && \
     touch ${HOME}/.local/share/powershell/PSReadLine/ConsoleHost_history.txt && \
     chmod 664 ${HOME}/.local/share/powershell/PSReadLine/ConsoleHost_history.txt && \
     pwsh \
@@ -38,7 +40,7 @@ RUN set -ex && \
           \$ErrorActionPreference = 'Stop' ; \
           \$ProgressPreference = 'SilentlyContinue' ; \
           while(!(Test-Path -Path \$env:PSModuleAnalysisCachePath)) {  \
-            Write-Host "'Waiting for $env:PSModuleAnalysisCachePath'" ; \
+            Write-Host "'Waiting for \$env:PSModuleAnalysisCachePath'" ; \
             Start-Sleep -Seconds 6 ; \
           }"
 # WORKDIR ${HOME}

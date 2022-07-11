@@ -18,10 +18,18 @@ spec:
         plugin:
           kubernetes:
             name: vs-code
+      # - name: echo
+      #   container:
+      #     image: registry.ford.com/abaker9/universal-developer-image:pwsh-a
+      #     memoryLimit: 1G
+      #     memoryRequest: 512Mi
+      #     cpuLimit: 1000m
+      #     cpuRequest: 1000m
       - name: frontend
         container:
           # image: quay.io/mloriedo/universal-developer-image:ubi8-dw-demo
-          image: registry.ford.com/abaker9/universal-developer-image:pwsh
+          # image: registry.ford.com/abaker9/universal-developer-image:pwsh-a
+          image: registry.ford.com/devspaces/universal-developer-image:ubi8-20220705-2025
           memoryLimit: 2G
           memoryRequest: 512Mi
           cpuLimit: 2000m

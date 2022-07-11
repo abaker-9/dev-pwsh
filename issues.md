@@ -1,5 +1,32 @@
 # OpenShift Dev Spaces Issues
 
+
+## Tasks defined in repo won't execute
+
+Run this task by going to **Terminal** -> **Run Task...**
+
+```
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "echo",
+            "type": "shell",
+            "command": "echo Hello"
+        }
+    ]
+}
+```
+### Failed Task
+
+![Bad Task](images/bad_task.png)
+
+### Success (using local vscode)
+
+![Good Task](images/good_task.png)
+
 ## Default Terminal window does not open
 
 - Displays frozen cursor
@@ -8,7 +35,7 @@
 
 ![Hung Terminal](images/hung_terminal.png)
 
-> Started after recent OpenShift upgrade
+> Doesn't happen when using an older image: `quay.io/che-incubator/che-code:insiders-74c6cfd`
 
 ## Terminal window wraps after X characters
 
@@ -19,6 +46,7 @@ For example:
 ```
 stuvwx.4$ abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqr
 ```
+> Only happens when there is a hung terminal window
 
 ## PowerShell Editor Service does not start
 
@@ -62,6 +90,8 @@ Logging out and back in solves problem.
 pwsh starts as expected, but blows up when a single character is entered
 
 ![pwsh fail](images/pwsh_term_fail.png)
+
+> Powershell runs fine as long as there are no hung terminal windows
 
 ### Notes running pwsh
 
