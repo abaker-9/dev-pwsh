@@ -7,7 +7,8 @@ attributes:
 components:
   - name: frontend
     container:
-      image: quay.io/mloriedo/universal-developer-image:buildah #registry.ford.com/abaker9/universal-developer-image:ubi9-latest
+      # image: quay.io/mloriedo/universal-developer-image:buildah #registry.ford.com/abaker9/universal-developer-image:ubi9-latest
+      image: registry.redhat.io/devspaces/udi-rhel8@sha256:d55549aad15742f6f7310da0c7abc1e65dd5d3ad2e3efb8fbf414cf91b9efac7
       # image: registry.ford.com/devspaces/universal-developer-image:ubi8-20220705-2025
       # image: registry.ford.com/abaker9/universal-developer-image:pwsh3
       memoryLimit: 2G
